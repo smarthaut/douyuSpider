@@ -19,6 +19,7 @@ class DouyuspiderItem(scrapy.Item):
     game_icon = scrapy.Field()
 
 class DouyuRoomItem(scrapy.Item):
+
     room_id = scrapy.Field()
     ower_uid = scrapy.Field()
     nickname = scrapy.Field()

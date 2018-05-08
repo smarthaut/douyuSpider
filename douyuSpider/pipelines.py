@@ -28,3 +28,38 @@ class DouyuspiderPipeline(object):
 
             self.mysqlhelper.insert(sql,params)
             return item
+
+''''
+try:
+                self.cursor.execute("""select * from video_review_douban where review_url = %s""", item["review_url"])
+                ret = self.cursor.fetchone()
+                if ret:
+                    self.cursor.execute(
+                        """update video_review_douban set review_title = %s,review_content = %s,review_author = %s,
+                            review_video = %s,review_time = %s,review_url = %s
+                            where review_url = %s""",
+                        (item['review_title'],
+                         item['review_content'],
+                         item['review_author'],
+                         item['review_video'],
+                         item['review_time'],
+                         item['review_url'],
+                         item['review_url']))
+                else:
+                    self.cursor.execute(
+                        """insert into video_review_douban(review_title,review_content,review_author,review_video,review_time,
+                          review_url)
+                          value (%s,%s,%s,%s,%s,%s)""",
+                        (item['review_title'],
+                         item['review_content'],
+                         item['review_author'],
+                         item['review_video'],
+                         item['review_time'],
+                         item['review_url']))
+                self.connect.commit()
+            except Exception as error:
+                log(error)
+            return item
+        else:
+            pass
+'''

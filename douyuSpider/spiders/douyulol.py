@@ -6,15 +6,17 @@ from douyuSpider.items import DouyuRoomItem
 
 class DouyulolSpider(scrapy.Spider):
     name = 'douyulol'
-    allowed_domains = ['http://open.douyucdn.cn/api/RoomApi/live/1']
+    allowed_domains = ['http://open.douyucdn.cn']
     offset = 0
     url = "http://open.douyucdn.cn/api/RoomApi/live/1?limit=20&offset="
     start_urls = [url + str(offset)]
 
     def parse(self, response):
-
-        datas = json.loads(response.text)["data"]
-        for data in datas:
+        loldatas = json.loads(response.text)['data']
+        filename = 'daouyumess.txt'
+        print(loldatas)
+        #open(filename,'wb+').write(loldatas)
+        '''for data in loldatas:
             item = DouyuRoomItem()
             item['room_id'] = data['room_id']
             item['ower_uid'] = data['ower_uid']
@@ -25,5 +27,5 @@ class DouyulolSpider(scrapy.Spider):
             self.offset += 20
             yield scrapy.Request(self.url + str(self.offset), callback=self.parse)
         else:
-            return
+            return'''
 
