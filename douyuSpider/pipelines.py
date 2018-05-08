@@ -6,6 +6,7 @@
 # See: http://doc.scrapy.org/en/latest/topics/item-pipeline.html
 from scrapy.conf import settings
 from douyuSpider.sqlhelper import MysqlHelper
+from douyuSpider.items import DouyuspiderItem
 
 class DouyuspiderPipeline(object):
 
@@ -19,9 +20,11 @@ class DouyuspiderPipeline(object):
         self.mysqlhelper = MysqlHelper(host,port,daname,user,password)
 
     def process_item(self,item, spider):
-        params = [item['cate_id'],item['game_name'],item['short_name'],item['game_url'],item['game_src'],
-                  item['game_icon']]
-        sql = 'insert into all_game(cate_id,game_name,short_name,game_url,game_src,game_icon) values(%s,' \
-              '%s,%s,%s,%s,%s);'
-        self.mysqlhelper.insert(sql,params)
-        return item
+
+        if item.__class__ == DouyuspiderItem:
+            params = [item['cate_id'],item['game_name'],item['short_name'],item['game_url'],item['game_src'],item['game_icon']]
+            sql = 'insert into all_game(cate_id,game_name,short_name,game_url,game_src,game_icon) values(%s,' \
+                  '%s,%s,%s,%s,%s);'
+
+            self.mysqlhelper.insert(sql,params)
+            return item
