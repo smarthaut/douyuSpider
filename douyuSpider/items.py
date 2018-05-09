@@ -21,6 +21,7 @@ class DouyuspiderItem(scrapy.Item):
 class DouyuRoomItem(scrapy.Item):
 
     room_id = scrapy.Field()
-    ower_uid = scrapy.Field()
+    owner_uid = scrapy.Field()
     nickname = scrapy.Field()
     url = scrapy.Field()
+    shortname =scrapy.Field()
