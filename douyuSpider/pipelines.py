@@ -29,7 +29,7 @@ class DouyuspiderPipeline(object):
         ret = self.mysqlhelper.get_one(sql, parames)
         if ret:
             sql = 'update '+shortname+' set nickname = %s where room_id = %s;'
-            params = [item['nick_name'], item['room_id']]
+            params = [item['nickname'], item['room_id']]
             self.mysqlhelper.update(sql, params)
             return item
         else:
